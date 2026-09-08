@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ランダム効果音</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background: #f5f5f5;
+    }
+
+    button {
+      font-size: 24px;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 12px;
+      background: #333;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🎵 ランダム効果音</h1>
+
+  <button id="randomButton">
+    効果音をランダム再生
+  </button>
+
+  <div id="status">ボタンを押してください</div>
+
+  <script>
+    // 効果音5つ
+    const sounds = [
+      "sound1.mp3",
+      "sound2.mp3",
+      "sound3.mp3",
+      "sound4.mp3",
+      "sound5.mp3"
+    ];
+
+    const button = document.getElementById("randomButton");
+    const status = document.getElementById("status");
+
+    button.addEventListener("click", function () {
+
+      // 5つの中からランダムに1つ選ぶ
+      const randomIndex = Math.floor(Math.random() * sounds.length);
+
+      // 選ばれた効果音
+      const audio = new Audio(sounds[randomIndex]);
+
+      // 再生
+      audio.play()
+        .then(() => {
+          status.textContent =
+            "再生中：効果音 " + (randomIndex + 1);
+        })
+        .catch((error) => {
+          status.textContent =
+            "効果音を再生できませんでした";
+          console.error(error);
+        });
+
+    });
+  </script>
+
+</body>
+</html>
